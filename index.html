@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Lądowanie na Komecie Mariusz9b</title>
+    <title>Lądowanie na komecie Mariusz9B</title>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.4.0/p5.js"></script>
     <style>
         body {
@@ -19,7 +19,7 @@
     </style>
 </head>
 <body>
-    <h1>Lądowanie na Komecie Mariusz9b</h1>
+    <h1>Lądowanie na komecie Mariusz9B</h1>
     <p>Sterowanie: Strzałki ← → do kierowania, Strzałka ↑ do ciągu</p>
     <script>
         let rocket;
@@ -107,6 +107,12 @@
                 this.vel.set(0, 0);
                 this.acc.set(0, 0);
               }
+              
+              // Zapobieganie wylatywaniu poza ekran u góry
+              if (this.pos.y < 0) {
+                this.pos.y = 0;
+                this.vel.y = 0;
+              }
             }
           }
 
@@ -116,6 +122,17 @@
             translate(this.pos.x, this.pos.y);
             rectMode(CENTER);
             rect(0, 0, 20, 40);
+            
+            // Dodanie czubka rakiety
+            fill(200, 0, 0);
+            triangle(-10, -20, 10, -20, 0, -40);
+            
+            // Dodanie płomienia podczas ciągu
+            if (keys["ArrowUp"]) {
+              fill(255, 0, 0);
+              triangle(-5, 20, 5, 20, 0, 35);
+            }
+            
             pop();
           }
         }
