@@ -34,6 +34,7 @@ function draw() {
   }
 }
 
+// Obsługa klawiszy w p5.js
 function keyPressed() {
   if (keyCode === UP_ARROW) {
     rocket.applyThrust();
@@ -46,6 +47,7 @@ function keyPressed() {
   }
 }
 
+// Klasa Rakiety
 class Rocket {
   constructor() {
     this.pos = createVector(width / 2, 50);
