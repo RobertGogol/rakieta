@@ -28,6 +28,7 @@
         let landed = false;
         let crashed = false;
         let groundY;
+        let keys = {};
 
         function setup() {
           createCanvas(800, 600);
@@ -41,6 +42,10 @@
           background(10);
           fill(200);
           rect(0, groundY, width, height - groundY);
+          
+          if (keys[UP_ARROW]) rocket.applyThrust();
+          if (keys[LEFT_ARROW]) rocket.applySideThrust(-0.05);
+          if (keys[RIGHT_ARROW]) rocket.applySideThrust(0.05);
           
           rocket.update();
           rocket.display();
@@ -59,16 +64,11 @@
         }
 
         function keyPressed() {
-          console.log("Key pressed: " + keyCode); // Debugowanie
-          if (keyCode === UP_ARROW) {
-            rocket.applyThrust();
-          }
-          if (keyCode === LEFT_ARROW) {
-            rocket.applySideThrust(-0.05);
-          }
-          if (keyCode === RIGHT_ARROW) {
-            rocket.applySideThrust(0.05);
-          }
+          keys[keyCode] = true;
+        }
+
+        function keyReleased() {
+          keys[keyCode] = false;
         }
 
         class Rocket {
