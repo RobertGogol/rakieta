@@ -43,9 +43,9 @@
           fill(200);
           rect(0, groundY, width, height - groundY);
           
-          if (keys[UP_ARROW]) rocket.applyThrust();
-          if (keys[LEFT_ARROW]) rocket.applySideThrust(-0.05);
-          if (keys[RIGHT_ARROW]) rocket.applySideThrust(0.05);
+          if (keys["ArrowUp"]) rocket.applyThrust();
+          if (keys["ArrowLeft"]) rocket.applySideThrust(-0.05);
+          if (keys["ArrowRight"]) rocket.applySideThrust(0.05);
           
           rocket.update();
           rocket.display();
@@ -63,13 +63,13 @@
           }
         }
 
-        function keyPressed() {
-          keys[keyCode] = true;
-        }
+        window.addEventListener("keydown", (event) => {
+          keys[event.key] = true;
+        });
 
-        function keyReleased() {
-          keys[keyCode] = false;
-        }
+        window.addEventListener("keyup", (event) => {
+          keys[event.key] = false;
+        });
 
         class Rocket {
           constructor() {
