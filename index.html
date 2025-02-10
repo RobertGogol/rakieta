@@ -30,9 +30,12 @@
         let groundY;
         let keys = {};
         let bgImage;
+        let bgLeft, bgRight;
 
         function preload() {
             bgImage = loadImage("kamlot.jpeg");
+            bgLeft = loadImage("kamlotL.jpg");
+            bgRight = loadImage("kamlotR.jpg");
         }
 
         function setup() {
@@ -112,6 +115,16 @@
               if (this.pos.y < 0) {
                 this.pos.y = 0;
                 this.vel.y = 0;
+              }
+
+              // Zmiana tła przy przekroczeniu krawędzi ekranu
+              if (this.pos.x < 0) {
+                this.pos.x = width;
+                bgImage = bgLeft;
+              }
+              if (this.pos.x > width) {
+                this.pos.x = 0;
+                bgImage = bgRight;
               }
             }
           }
