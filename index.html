@@ -29,6 +29,11 @@
         let crashed = false;
         let groundY;
         let keys = {};
+        let bgImage;
+
+        function preload() {
+            bgImage = loadImage("kamlot.jpeg");
+        }
 
         function setup() {
           createCanvas(800, 600);
@@ -39,7 +44,7 @@
         }
 
         function draw() {
-          background(10);
+          background(bgImage);
           fill(200);
           rect(0, groundY, width, height - groundY);
           
