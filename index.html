@@ -1,136 +1,26 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
-<html>
+<!DOCTYPE html>
+<html lang="pl">
 <head>
-  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-  <meta http-equiv="Content-Style-Type" content="text/css">
-  <title></title>
-  <meta name="Generator" content="Cocoa HTML Writer">
-  <meta name="CocoaVersion" content="2575.4">
-  <style type="text/css">
-    p.p1 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica}
-    p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica; min-height: 14.0px}
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lądowanie na Europie</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.4.0/p5.js"></script>
+    <script defer src="script.js"></script>
+    <style>
+        body {
+            margin: 0;
+            background: black;
+            color: white;
+            text-align: center;
+        }
+        canvas {
+            display: block;
+            margin: auto;
+        }
+    </style>
 </head>
 <body>
-<p class="p1">&lt;!DOCTYPE html&gt;</p>
-<p class="p1">&lt;html lang="pl"&gt;</p>
-<p class="p1">&lt;head&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;meta charset="UTF-8"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;title&gt;Lądowanie na Europie&lt;/title&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.4.0/p5.js"&gt;&lt;/script&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;script defer src="script.js"&gt;&lt;/script&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;style&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>body {</p>
-<p class="p1"><span class="Apple-converted-space">            </span>margin: 0;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>background: black;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>color: white;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>text-align: center;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>}</p>
-<p class="p1"><span class="Apple-converted-space">        </span>canvas {</p>
-<p class="p1"><span class="Apple-converted-space">            </span>display: block;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>margin: auto;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>}</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;/style&gt;</p>
-<p class="p1">&lt;/head&gt;</p>
-<p class="p1">&lt;body&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;h1&gt;Lądowanie na Europie&lt;/h1&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;p&gt;Sterowanie: Strzałki ← → do kierowania, Strzałka ↑ do ciągu&lt;/p&gt;</p>
-<p class="p1">&lt;/body&gt;</p>
-<p class="p1">&lt;/html&gt;</p>
-<p class="p2"><br></p>
-<p class="p1">&lt;script&gt;</p>
-<p class="p1">let rocket;</p>
-<p class="p1">let gravity;</p>
-<p class="p1">let thrust;</p>
-<p class="p1">let landed = false;</p>
-<p class="p1">let crashed = false;</p>
-<p class="p1">let groundY;</p>
-<p class="p2"><br></p>
-<p class="p1">function setup() {</p>
-<p class="p1"><span class="Apple-converted-space">  </span>createCanvas(800, 600);</p>
-<p class="p1"><span class="Apple-converted-space">  </span>rocket = new Rocket();</p>
-<p class="p1"><span class="Apple-converted-space">  </span>gravity = createVector(0, 0.05);</p>
-<p class="p1"><span class="Apple-converted-space">  </span>thrust = createVector(0, -0.1);</p>
-<p class="p1"><span class="Apple-converted-space">  </span>groundY = height - 50;</p>
-<p class="p1">}</p>
-<p class="p2"><br></p>
-<p class="p1">function draw() {</p>
-<p class="p1"><span class="Apple-converted-space">  </span>background(10);</p>
-<p class="p1"><span class="Apple-converted-space">  </span>fill(200);</p>
-<p class="p1"><span class="Apple-converted-space">  </span>rect(0, groundY, width, height - groundY);</p>
-<p class="p2"><span class="Apple-converted-space">  </span></p>
-<p class="p1"><span class="Apple-converted-space">  </span>rocket.update();</p>
-<p class="p1"><span class="Apple-converted-space">  </span>rocket.display();</p>
-<p class="p2"><span class="Apple-converted-space">  </span></p>
-<p class="p1"><span class="Apple-converted-space">  </span>if (landed) {</p>
-<p class="p1"><span class="Apple-converted-space">    </span>fill(0, 255, 0);</p>
-<p class="p1"><span class="Apple-converted-space">    </span>textSize(32);</p>
-<p class="p1"><span class="Apple-converted-space">    </span>text("Lądowanie udane!", width / 2 - 100, height / 2);</p>
-<p class="p1"><span class="Apple-converted-space">    </span>noLoop();</p>
-<p class="p1"><span class="Apple-converted-space">  </span>} else if (crashed) {</p>
-<p class="p1"><span class="Apple-converted-space">    </span>fill(255, 0, 0);</p>
-<p class="p1"><span class="Apple-converted-space">    </span>textSize(32);</p>
-<p class="p1"><span class="Apple-converted-space">    </span>text("Katastrofa!", width / 2 - 100, height / 2);</p>
-<p class="p1"><span class="Apple-converted-space">    </span>noLoop();</p>
-<p class="p1"><span class="Apple-converted-space">  </span>}</p>
-<p class="p1">}</p>
-<p class="p2"><br></p>
-<p class="p1">function keyPressed() {</p>
-<p class="p1"><span class="Apple-converted-space">  </span>if (keyCode === UP_ARROW) {</p>
-<p class="p1"><span class="Apple-converted-space">    </span>rocket.applyThrust();</p>
-<p class="p1"><span class="Apple-converted-space">  </span>}</p>
-<p class="p1"><span class="Apple-converted-space">  </span>if (keyCode === LEFT_ARROW) {</p>
-<p class="p1"><span class="Apple-converted-space">    </span>rocket.applySideThrust(-0.05);</p>
-<p class="p1"><span class="Apple-converted-space">  </span>}</p>
-<p class="p1"><span class="Apple-converted-space">  </span>if (keyCode === RIGHT_ARROW) {</p>
-<p class="p1"><span class="Apple-converted-space">    </span>rocket.applySideThrust(0.05);</p>
-<p class="p1"><span class="Apple-converted-space">  </span>}</p>
-<p class="p1">}</p>
-<p class="p2"><br></p>
-<p class="p1">class Rocket {</p>
-<p class="p1"><span class="Apple-converted-space">  </span>constructor() {</p>
-<p class="p1"><span class="Apple-converted-space">    </span>this.pos = createVector(width / 2, 50);</p>
-<p class="p1"><span class="Apple-converted-space">    </span>this.vel = createVector(0, 0);</p>
-<p class="p1"><span class="Apple-converted-space">    </span>this.acc = createVector(0, 0);</p>
-<p class="p1"><span class="Apple-converted-space">  </span>}</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">  </span>applyThrust() {</p>
-<p class="p1"><span class="Apple-converted-space">    </span>this.acc.add(thrust);</p>
-<p class="p1"><span class="Apple-converted-space">  </span>}</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">  </span>applySideThrust(amount) {</p>
-<p class="p1"><span class="Apple-converted-space">    </span>this.acc.x += amount;</p>
-<p class="p1"><span class="Apple-converted-space">  </span>}</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">  </span>update() {</p>
-<p class="p1"><span class="Apple-converted-space">    </span>if (!landed &amp;&amp; !crashed) {</p>
-<p class="p1"><span class="Apple-converted-space">      </span>this.acc.add(gravity);</p>
-<p class="p1"><span class="Apple-converted-space">      </span>this.vel.add(this.acc);</p>
-<p class="p1"><span class="Apple-converted-space">      </span>this.pos.add(this.vel);</p>
-<p class="p1"><span class="Apple-converted-space">      </span>this.acc.mult(0);</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">      </span>if (this.pos.y + 20 &gt;= groundY) {</p>
-<p class="p1"><span class="Apple-converted-space">        </span>if (this.vel.y &lt; 1 &amp;&amp; abs(this.vel.x) &lt; 0.5) {</p>
-<p class="p1"><span class="Apple-converted-space">          </span>landed = true;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>} else {</p>
-<p class="p1"><span class="Apple-converted-space">          </span>crashed = true;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>}</p>
-<p class="p1"><span class="Apple-converted-space">        </span>this.vel.set(0, 0);</p>
-<p class="p1"><span class="Apple-converted-space">        </span>this.acc.set(0, 0);</p>
-<p class="p1"><span class="Apple-converted-space">      </span>}</p>
-<p class="p1"><span class="Apple-converted-space">    </span>}</p>
-<p class="p1"><span class="Apple-converted-space">  </span>}</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">  </span>display() {</p>
-<p class="p1"><span class="Apple-converted-space">    </span>fill(255);</p>
-<p class="p1"><span class="Apple-converted-space">    </span>push();</p>
-<p class="p1"><span class="Apple-converted-space">    </span>translate(this.pos.x, this.pos.y);</p>
-<p class="p1"><span class="Apple-converted-space">    </span>rectMode(CENTER);</p>
-<p class="p1"><span class="Apple-converted-space">    </span>rect(0, 0, 20, 40);</p>
-<p class="p1"><span class="Apple-converted-space">    </span>pop();</p>
-<p class="p1"><span class="Apple-converted-space">  </span>}</p>
-<p class="p1">}</p>
-<p class="p1">&lt;/script&gt;</p>
+    <h1>Lądowanie na Europie</h1>
+    <p>Sterowanie: Strzałki ← → do kierowania, Strzałka ↑ do ciągu</p>
 </body>
 </html>
